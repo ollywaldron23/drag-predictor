@@ -1,6 +1,6 @@
 Drag Predictor
 
-![Drag Predictor App](assets/Drag-Predictor-App.png)
+![Drag Predictor App](frontend/src/assets/Drag-Predictor-App.png)
 
 
 Overview:
