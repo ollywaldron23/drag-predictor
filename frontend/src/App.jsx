@@ -1,10 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "./App.css";
+import { CircleShape, EllipseShape, FlatPlateShape } from "./components/Shapes";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 function App() {
-  const [shape, setShape] = useState("circle");
-  const [aspectRatio, setAspectRatio] = useState(1.0);
+
+  const shapes = [
+  { name: "circle", Component: CircleShape },
+  { name: "ellipse", Component: EllipseShape },
+  { name: "flat_plate", Component: FlatPlateShape },
+  ];
+
+  const [shape, setShape] = useState("ellipse"); // default shape is ellipse
+  const [aspectRatio, setAspectRatio] = useState(2.0);
   const [drag, setDrag] = useState(null);
   const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(1);
+
+  useEffect(() => {
+    const newShape = shapes[currentIndex].name;
+    setShape(newShape);
+
+    if (newShape !== "ellipse") {
+      setAspectRatio(1.0);  // reset aspect ratio for non-ellipse
+    }
+  }, [currentIndex, shapes]);
+
+  useEffect(() => {
+    if (window.particlesJS) {
+      window.particlesJS.load('particles-js', '/particles/particles.json', () => {
+        console.log('Particles.js loaded');
+      });
+    }
+  }, []);
+
+  const prevShape = () => {
+    setCurrentIndex((currentIndex - 1 + shapes.length) % shapes.length);
+  };
+
+  const nextShape = () => {
+    setCurrentIndex((currentIndex + 1) % shapes.length);
+  };
+
+  const CurrentShapeComponent = shapes[currentIndex].Component;
 
   const predictDrag = async () => {
     try {
@@ -32,42 +71,69 @@ function App() {
     }
   };
 
+
+
   return (
-    <div>
-      <h1>Drag Coefficient Predictor</h1>
-
-      <label>
-        Shape:
-        <select value={shape} onChange={(e) => setShape(e.target.value)}>
-          <option value="circle">Circle</option>
-          <option value="ellipse">Ellipse</option>
-          <option value="flat_plate">Flat Plate</option>
-        </select>
-      </label>
-
-      <label>
-        Aspect Ratio:
-        <input
-          type="number"
-          step="0.1"
-          min="1"
-          value={aspectRatio}
-          onChange={(e) => setAspectRatio(e.target.value)}
-        />
-      </label>
-
-      <button onClick={predictDrag} >
-        Predict
-      </button>
-
-      {drag !== null && (
-        <p>
-          Predicted drag coefficient: <strong>{drag}</strong>
+    <>
+      <div
+        id="particles-js"
+        style={{
+          position: 'fixed',
+          width: '100vw',
+          height: '100vh',
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+      />
+    <div class="app-main-div">
+      <div class="app-header">
+        <h1 class="app-title">Drag Predictor</h1>
+        <p class="app-description">
+          Predict the drag coefficient for various shapes.
+          <br /> 
+          Circle and flat plate shapes are fixed, while the ellipse shape allows you to adjust the aspect ratio.
         </p>
+      </div>  
+      <div class="form-container">  
+        <label class="shape-label">
+          <div className="shape-carousel">
+            <button onClick={prevShape} aria-label="Previous Shape"><IoIosArrowBack /></button>
+
+            <div className="shape-display" onClick={() => setShape(currentShape.name)}>
+              <CurrentShapeComponent aspectRatio={aspectRatio} />
+            </div>
+
+            <button onClick={nextShape} aria-label="Next Shape"><IoIosArrowForward /></button>
+          </div>
+        </label>
+
+        <label htmlFor="aspectRatioSlider">Aspect Ratio: {aspectRatio}</label>
+        <input
+          id="aspectRatioSlider"
+          type="range"
+          min="1"
+          max="3"
+          step="0.1"
+          value={aspectRatio}
+          onChange={(e) => setAspectRatio(parseFloat(e.target.value))}
+          disabled={shape !== "ellipse"}
+        />
+
+        <button onClick={predictDrag} class="predict-button">
+          Predict
+        </button>
+
+        {drag !== null && (
+          <p class="result">
+            Predicted Drag Coefficient: <strong>{drag}</strong>
+          </p>
       )}
 
-      {error && <p>{error}</p>}
+        {error && <p class="error">{error}</p>}
+      </div>
     </div>
+    </>
   );
 }
 
