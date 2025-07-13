@@ -2,35 +2,24 @@ Drag Predictor
 
 ![Drag Predictor App](frontend/src/assets/Drag-Predictor-App.png)
 
-Overview -
+Overview:
 
-This app was built as a hands-on project to explore how machine learning can be applied to predicting physical properties — specifically, drag coefficients for 2D shapes. It combines:
+This app was built as a hands-on project to explore how machine learning can be used to predict physical properties — in this case, drag coefficients for 2D shapes. 
 
-A React frontend with SVG-based shape rendering
-A Python backend using scikit-learn to train and serve the model
-Dynamic shape generation with tunable aspect ratios (e.g. ellipses, rectangles)
-A lightweight ML workflow to simulate real-world predictive modeling
+It combines a clean React frontend with SVG-based shape rendering, a Python backend using scikit-learn to train a model, dynamic shape generation with tunable aspect ratios (for ellipses, rectangles, etc.), and a simple ML workflow to simulate real-world predictive modelling.
 
-The goal was to demonstrate:
+The aim was to demonstrate integration between frontend and ML backend, visual interactivity for abstract physics concepts, and practical use of Python for fast prototyping in a physics/data context.
 
-Full-stack integration between a modern frontend and a Python ML backend
-Interactive visual representation of abstract physics concepts
-Practical use of Python for fast scientific prototyping and inference
+Frontend:
 
-Frontend -
+React app with a shape carousel and aspect ratio slider. Sends inputs to backend via HTTP POST, displays predicted drag.
 
-Built with React
-Shape carousel with real-time aspect ratio adjustment
-Sends inputs to backend via HTTP POST and displays predicted drag coefficient
+Backend:
 
-Backend -
+Python API running a trained ML model for drag coefficient prediction. Receives JSON data, returns predicted drag values.
 
-Python API using a trained ML model (scikit-learn)
-Accepts JSON inputs and returns predicted drag values
-Simulates basic physics-informed ML inference
+Additional Info:
 
-Additional Notes -
-
-Aspect ratio is a unitless parameter that defines shape geometry
-Demonstrates end-to-end flow: UI → model → prediction
-Built for demonstration and learning purposes — not intended for production use
+Aspect ratio is a unitless numeric parameter influencing shape geometry. 
+Demonstrates full-stack integration of React UI with Python ML backend for scientific modeling. 
+For evaluation purposes only; not production-ready.
