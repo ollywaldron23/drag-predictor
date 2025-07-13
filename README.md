@@ -2,26 +2,35 @@ Drag Predictor
 
 ![Drag Predictor App](frontend/src/assets/Drag-Predictor-App.png)
 
+Overview -
 
-Overview:
+This app was built as a hands-on project to explore how machine learning can be applied to predicting physical properties — specifically, drag coefficients for 2D shapes. It combines:
 
-A React frontend with a Python backend implementing machine learning to predict drag coefficients for 2D shapes based on shape type and aspect ratio.
+A React frontend with SVG-based shape rendering
+A Python backend using scikit-learn to train and serve the model
+Dynamic shape generation with tunable aspect ratios (e.g. ellipses, rectangles)
+A lightweight ML workflow to simulate real-world predictive modeling
 
+The goal was to demonstrate:
 
-Frontend:
+Full-stack integration between a modern frontend and a Python ML backend
+Interactive visual representation of abstract physics concepts
+Practical use of Python for fast scientific prototyping and inference
 
-React app with a shape carousel and aspect ratio slider
-Sends inputs to backend via HTTP POST, displays predicted drag
+Frontend -
 
+Built with React
+Shape carousel with real-time aspect ratio adjustment
+Sends inputs to backend via HTTP POST and displays predicted drag coefficient
 
-Backend:
+Backend -
 
-Python API running a trained ML model for drag coefficient prediction
-Receives JSON data, returns predicted drag values
+Python API using a trained ML model (scikit-learn)
+Accepts JSON inputs and returns predicted drag values
+Simulates basic physics-informed ML inference
 
+Additional Notes -
 
-Additional Info:
-
-Aspect ratio is a unitless numeric parameter influencing shape geometry
-Demonstrates full-stack integration of React UI with Python ML backend for scientific modeling
-For evaluation purposes only; not production-ready
+Aspect ratio is a unitless parameter that defines shape geometry
+Demonstrates end-to-end flow: UI → model → prediction
+Built for demonstration and learning purposes — not intended for production use
