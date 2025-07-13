@@ -3,18 +3,40 @@
   flex-direction: column;
   height: 100vh;
   padding: 1rem;
-  background-color: #24242400; /* transparent - keep as is or adjust to match your background */
-  color: white;
+  background-color: #242424be; /* semi-transparent dark */
+  color: #f0f0f0; /* soft white for better readability */
   overflow: hidden;
+  font-family: 'Aeonik Pro', Arial, sans-serif;
 }
 
+/* Header */
 .app-header {
   align-self: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   text-align: center;
-  font-family: Aeonik Pro, Arial, sans-serif;
+  color: #e0e0e0;
+  user-select: none;
 }
 
+/* Title with subtle shadow and smooth scaling on hover */
+.app-title {
+  display: inline-block;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  cursor: default;
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  color: #fefefe;
+  text-shadow: 0 0 4px #666666aa;
+}
+
+.app-title:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 8px #aaa, 0 0 14px #ccc;
+  color: #ffffff;
+}
+
+/* Form container text */
 .form-container {
   flex-grow: 1;
   display: flex;
@@ -25,10 +47,12 @@
   width: 100%;
   margin: 0 auto;
   align-items: center;
-  font-family: Aeonik Pro, Arial, sans-serif;
+  color: #e8e8e8;
+  font-family: 'Aeonik Pro', Arial, sans-serif;
+  font-weight: 500;
 }
 
-/* Range slider */
+/* Range slider track */
 input[type="range"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -42,6 +66,7 @@ input[type="range"] {
   margin-top: 0.5rem;
 }
 
+/* Range slider thumb - subtle tealish blue */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -59,11 +84,11 @@ input[type="range"]:hover::-webkit-slider-thumb {
   background: #4A90E2;
 }
 
-/* Firefox */
+/* Firefox range thumb */
 input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: #1ABC9C;
+  background: #357ABD;
   cursor: pointer;
   border-radius: 50%;
   border: none;
@@ -79,7 +104,7 @@ input[type="range"]::-moz-range-thumb {
   margin-bottom: 2rem;
 }
 
-/* Fixed size container for the shapes */
+/* Fixed size container for shapes */
 .shape-display {
   width: 160px;
   height: 160px;
@@ -91,20 +116,7 @@ input[type="range"]::-moz-range-thumb {
   overflow: visible;
 }
 
-/* You will want to style the actual shapes in your SVG or canvas components like this: */
-/* Example shape styles if they are SVGs inside .shape-display */
-.shape-display svg {
-  fill: #ededed;          /* primary shape fill: blue */
-  stroke: #357ABD;        /* darker blue outline */
-  stroke-width: 2px;
-  transition: fill 0.3s ease;
-}
-
-.shape-display:hover svg {
-  fill: #dddee0;          /* lighter blue on hover */
-}
-
-/* Buttons for carousel arrows */
+/* Buttons for carousel arrows - consistent teal/blue accent */
 .shape-carousel button {
   background: none;
   border: none;
@@ -113,22 +125,22 @@ input[type="range"]::-moz-range-thumb {
   font-size: 2rem;
   line-height: 1;
   user-select: none;
-  color: #4A90E2;          /* blue accent */
+  color: #357ABD; /* consistent blue accent */
   transition: color 0.2s ease;
 }
 
 .shape-carousel button:hover,
 .shape-carousel button:focus {
-  color: #6BA9E6;          /* lighter blue on hover/focus */
+  color: #4A90E2; /* lighter blue on hover/focus */
   outline: none;
 }
 
 .shape-carousel button:focus-visible {
-  outline: 2px solid #6BA9E6;
+  outline: 2px solid #4A90E2;
   outline-offset: 2px;
 }
 
-/* For desktop shape options (if you still use these) */
+/* Shape selector container */
 .shape-selector {
   display: flex;
   gap: 1rem;
@@ -146,17 +158,25 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #e8e8e8;
 }
 
 .shape-option:hover {
-  border-color: #6BA9E6;  /* teal accent */
-}
-
-.shape-option.selected {
   border-color: #4A90E2;
 }
 
-/* Responsive for smaller screens */
+.shape-option.selected {
+  border-color: #357ABD;
+}
+
+.result {
+  font-size: 1.3rem;
+  color: #e8e8e8;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Responsive tweaks */
 @media (max-width: 400px) {
   .shape-display {
     width: 90px;

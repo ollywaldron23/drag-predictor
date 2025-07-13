@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { CircleShape, EllipseShape, FlatPlateShape } from "./components/Shapes";
+import { CircleShape, EllipseShape, FlatPlateShape, RectangleShape, ParallelogramShape, TriangleShape, HexagonShape, StarShape } from "./components/Shapes";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -10,6 +10,11 @@ function App() {
   { name: "circle", Component: CircleShape },
   { name: "ellipse", Component: EllipseShape },
   { name: "flat_plate", Component: FlatPlateShape },
+  { name: "rectangle", Component: RectangleShape },
+  { name: "parallelogram", Component: ParallelogramShape },
+  { name: "triangle", Component: TriangleShape },
+  { name: "hexagon", Component: HexagonShape },
+  { name: "star", Component: StarShape },
   ];
 
   const [shape, setShape] = useState("ellipse"); // default shape is ellipse
@@ -22,7 +27,7 @@ function App() {
     const newShape = shapes[currentIndex].name;
     setShape(newShape);
 
-    if (newShape !== "ellipse") {
+    if (newShape !== "ellipse" && newShape !== "rectangle" && newShape !== "parallelogram") {
       setAspectRatio(1.0);  // reset aspect ratio for non-ellipse
     }
   }, [currentIndex, shapes]);
@@ -92,7 +97,7 @@ function App() {
         <p class="app-description">
           Predict the drag coefficient for various shapes.
           <br /> 
-          Circle and flat plate shapes are fixed, while the ellipse shape allows you to adjust the aspect ratio.
+          Most shapes are fixed, while the ellipse, rectangle and parallelogram shapes allow you to adjust the aspect ratio.
         </p>
       </div>  
       <div class="form-container">  
@@ -117,7 +122,7 @@ function App() {
           step="0.1"
           value={aspectRatio}
           onChange={(e) => setAspectRatio(parseFloat(e.target.value))}
-          disabled={shape !== "ellipse"}
+          disabled={shape !== "ellipse" && shape !== "rectangle" && shape !== "parallelogram"} // disable for non-ellipse shapes
         />
 
         <button onClick={predictDrag} class="predict-button">

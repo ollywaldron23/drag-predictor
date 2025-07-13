@@ -13,18 +13,35 @@ def generate_dataset(n=300):
     data = []
 
     for _ in range(n):
-        shape = np.random.choice(["circle", "ellipse", "flat_plate"]) # randomly picks one of 3 shapes
+        shape = np.random.choice([
+            "circle", "ellipse", "flat_plate", "rectangle", "parallelogram",
+            "triangle", "hexagon", "star"
+        ])
 
         if shape == "circle":
             aspect_ratio = 1.0
             drag = 0.47
         elif shape == "flat_plate":
-            aspect_ratio = 1.0  # not meaningful, just for input consistency
+            aspect_ratio = 1.0
             drag = 1.28
         elif shape == "ellipse":
             aspect_ratio = np.round(np.random.uniform(1.1, 3.0), 2)
-            # approximate drag increases with aspect ratio
-            drag = 0.47 + (aspect_ratio - 1) * 0.4  # linear interpolation
+            drag = 0.47 + (aspect_ratio - 1) * 0.4
+        elif shape == "rectangle":
+            aspect_ratio = np.round(np.random.uniform(1.1, 3.0), 2)
+            drag = 1.05 + (aspect_ratio - 1) * 0.2
+        elif shape == "parallelogram":
+            aspect_ratio = np.round(np.random.uniform(1.1, 3.0), 2)
+            drag = 1.1 + (aspect_ratio - 1) * 0.25
+        elif shape == "triangle":
+            aspect_ratio = 1.0
+            drag = 0.8 
+        elif shape == "hexagon":
+            aspect_ratio = 1.0
+            drag = 0.6
+        elif shape == "star":
+            aspect_ratio = 1.0 
+            drag = 1.0
 
         data.append({
             "shape": shape,
